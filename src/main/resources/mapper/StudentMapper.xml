@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatisplus.mapper.StudentMapper">
+
+    <resultMap type="com.example.mybatisplus.entity.Student" id="baseStudentResultMap">
+        <id column="sId" property="sId"/>
+        <result column="name" property="name"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+    </resultMap>
+
+    <resultMap type="com.example.mybatisplus.entity.Student" id="queryStudentListResultMap" extends="baseStudentResultMap">
+        <association property="classes" javaType="com.example.mybatisplus.entity.Classes">
+            <id column="cId" property="cId"/>
+            <result column="calssName" property="calssName"/>
+            <result column="code" property="code"/>
+        </association>
+    </resultMap>
+
+    <select id="queryStudentList" resultMap="queryStudentListResultMap">
+        SELECT s.*,c.calssName,c.code
+        FROM student s,classes c
+        WHERE s.c_Id=c.cId;
+</select>
+
+    <!-- 根据班级的id，获取学生列表 -->
+    <select id="queryStudentByClazzId" resultMap="baseStudentResultMap" parameterType="int">
+  	select * from student where c_Id=#{id};
+</select>
+</mapper>

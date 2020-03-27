@@ -1,0 +1,27 @@
+#server:
+#  port: 8080
+#
+#spring:
+#  datasource:
+#    username: root
+#    password: 123456
+#    url: jdbc:mysql://localhost:3306/mybatisplus_crud?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+#    driver-class-name: com.mysql.jdbc.Driver
+##
+##mybatis:
+##  mapper-locations: classpath:mapping/*Mapper.xml
+##  type-aliases-package: com.example.
+#
+##showSql
+#logging:
+#  level:
+#    com:
+#      example:
+#        mapper : debug
+#
+#thymeleaf:
+#  prefix: classpath:/templates
+#  suffix: .html
+#  cache: false
+#  encoding: utf-8
+#  mode: LEGACYHTML5

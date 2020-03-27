@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatisplus.mapper.ArticleMapper">
+    <resultMap id="baseArticleResultMap" type="com.example.mybatisplus.entity.Article">
+        <id column="aId" property="aId"/>
+        <result column="name" property="name"/>
+        <result column="price" property="price"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+    <resultMap id="findArticleByIdResultMap" type="com.example.mybatisplus.entity.Article" extends="baseArticleResultMap">
+        <collection property="orders" javaType="ArrayList" ofType="com.example.mybatisplus.entity.Article"
+                    select="" column="aId">
+
+        </collection>
+    </resultMap>
+
+    <!--根据订单id查询商品-->
+    <select id="findArticleByoOrderId" resultMap="baseArticleResultMap">
+      select * from article  where id
+		in (select article_id from tb_item where order_id=#{id})
+
+    </select>
+
+    <select id="findArticleById" resultMap="findArticleByIdResultMap">
+        select * from article where id=#{id}
+    </select>
+
+    <select id="findArticleId" resultMap="baseArticleResultMap">
+        select * from article where aid=#{id}
+    </select>
+</mapper>
